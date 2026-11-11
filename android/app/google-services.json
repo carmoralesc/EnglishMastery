@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "451200222797",
+    "project_id": "englishmasteracademy-bbaca",
+    "storage_bucket": "englishmasteracademy-bbaca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451200222797:android:7a118f18089c5a9ee73e04",
+        "android_client_info": {
+          "package_name": "com.beateng.englishmasteracademy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO3ZO9rEeXg7c-quZy3p0YTAeupgqSsuw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
