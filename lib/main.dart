@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'services/auth_service.dart';
+import 'services/firestore_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,12 @@ class EnglishMasterAcademyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<AuthService>(create: (_) => AuthService()),
+        Provider<FirestoreService>(create: (_) => FirestoreService()),
+        Provider<AuthService>(
+          create: (ctx) => AuthService(
+            firestoreService: ctx.read<FirestoreService>(),
+          ),
+        ),
       ],
       child: MaterialApp(
         title: 'English Master Academy',
@@ -53,7 +59,6 @@ class AuthGate extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const _LoadingScreen();
         }
-
         final user = snapshot.data;
         if (user == null) {
           return const LoginScreen();
