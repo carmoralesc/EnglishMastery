@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/level_model.dart';
 import '../services/firestore_service.dart';
+import 'level_detail_screen.dart';
 
 class PathScreen extends StatelessWidget {
   const PathScreen({super.key});
@@ -86,12 +87,12 @@ class PathScreen extends StatelessWidget {
                       ? const Icon(Icons.lock, color: Colors.grey)
                       : const Icon(Icons.chevron_right),
                   onTap: () {
-                    // TODO(Fase 5): Navegar a LevelDetailScreen.
-                    // Por ahora mostramos un SnackBar para confirmar que el tap funciona.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Seleccionaste: ${level.title}. (Detalle en Fase 5)',
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LevelDetailScreen(
+                          levelId: level.id,
+                          levelTitle: level.title,
                         ),
                       ),
                     );
