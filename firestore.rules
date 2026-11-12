@@ -1,0 +1,30 @@
+// Copia de referencia — la fuente de verdad es la consola de Firebase
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Perfil del usuario: solo el dueño lee y escribe.
+    match /users/{userId} {
+      allow read, write: if request.auth != null
+                        && request.auth.uid == userId;
+    }
+
+    // Contenido educativo: lectura autenticada, escritura solo admin
+    // (consola o Admin SDK, que ignoran reglas).
+    match /levels/{levelId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    match /levels/{levelId}/sessions/{sessionId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    match /tasks/{taskId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+  }
+}

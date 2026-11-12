@@ -1,0 +1,12 @@
+{
+  "name": "ema-seed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Seed de Firestore para English Master Academy",
+  "scripts": {
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.0.0"
+  }
+}

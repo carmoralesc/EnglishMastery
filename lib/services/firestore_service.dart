@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/level_model.dart';
+import '../models/session_model.dart';
+import '../models/task_model.dart';
 import '../models/user_profile.dart';
 
 class FirestoreService {
@@ -48,5 +51,43 @@ class FirestoreService {
     await _usersRef.doc(uid).update({
       'streak': streak,
     });
+  }
+
+  // ── CONTENIDO EDUCATIVO ────────────────────────────────────────
+
+  Stream<List<LevelModel>> watchLevels() {
+    return _db.collection('levels').orderBy('order').snapshots().map(
+        (snapshot) => snapshot.docs
+            .map((doc) => LevelModel.fromMap(doc.id, doc.data()))
+            .toList());
+  }
+
+  Future<LevelModel?> getLevel(String levelId) async {
+    final snapshot = await _db.collection('levels').doc(levelId).get();
+    if (!snapshot.exists) return null;
+    return LevelModel.fromMap(snapshot.id, snapshot.data()!);
+  }
+
+  Stream<List<SessionModel>> watchSessionsForLevel(String levelId) {
+    return _db
+        .collection('levels')
+        .doc(levelId)
+        .collection('sessions')
+        .orderBy('order')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => SessionModel.fromMap(doc.id, doc.data()))
+            .toList());
+  }
+
+  Stream<List<TaskModel>> watchTasksForSession(String sessionId) {
+    return _db
+        .collection('tasks')
+        .where('sessionId', isEqualTo: sessionId)
+        .orderBy('order')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => TaskModel.fromMap(doc.id, doc.data()))
+            .toList());
   }
 }

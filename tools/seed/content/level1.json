@@ -1,0 +1,202 @@
+{
+  "levels": [
+    {
+      "id": "level_1",
+      "languageCode": "en",
+      "order": 1,
+      "title": "Getting Started",
+      "description": "Primeros pasos en inglés: saludos, números y presente simple.",
+      "isLocked": false,
+      "iconName": "rocket_launch",
+      "sessions": [
+        {
+          "id": "session_1_1",
+          "order": 1,
+          "difficultyTier": "entry",
+          "title": "Basic Greetings",
+          "description": "Aprende a saludar en distintos momentos del día.",
+          "tasks": [
+            {
+              "id": "task_1_1_1",
+              "order": 1,
+              "type": "grammar",
+              "title": "Choose the right greeting",
+              "xpReward": 10,
+              "contentJson": {
+                "prompt": "It's 9 AM. What do you say?",
+                "options": ["Good morning", "Good night", "Good evening"],
+                "correctIndex": 0
+              }
+            },
+            {
+              "id": "task_1_1_2",
+              "order": 2,
+              "type": "vocabulary",
+              "title": "Match greeting to time of day",
+              "xpReward": 10,
+              "contentJson": {
+                "pairs": [
+                  { "left": "Good morning", "right": "AM" },
+                  { "left": "Good afternoon", "right": "PM (before 6)" },
+                  { "left": "Good evening", "right": "PM (after 6)" }
+                ]
+              }
+            },
+            {
+              "id": "task_1_1_3",
+              "order": 3,
+              "type": "reading",
+              "title": "Read the short dialogue",
+              "xpReward": 15,
+              "contentJson": {
+                "passage": "Anna: Good morning, Tom! Tom: Good morning, Anna. How are you? Anna: I'm fine, thanks.",
+                "questions": [
+                  {
+                    "question": "When does this conversation happen?",
+                    "options": ["Morning", "Afternoon", "Night"],
+                    "correctIndex": 0
+                  }
+                ]
+              }
+            },
+            {
+              "id": "task_1_1_4",
+              "order": 4,
+              "type": "listening",
+              "title": "Listen to a greeting clip",
+              "xpReward": 20,
+              "contentJson": {
+                "videoId": "PLACEHOLDER_YT_ID",
+                "startSecond": 12,
+                "endSecond": 22,
+                "prompt": "Which greeting did the speaker use?",
+                "options": ["Good morning", "Good afternoon", "Good night"],
+                "correctIndex": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": "session_1_2",
+          "order": 2,
+          "difficultyTier": "entry",
+          "title": "Numbers 1-20",
+          "description": "Reconoce y pronuncia los números del 1 al 20.",
+          "tasks": [
+            {
+              "id": "task_1_2_1",
+              "order": 1,
+              "type": "vocabulary",
+              "title": "Match the number",
+              "xpReward": 10,
+              "contentJson": {
+                "prompt": "Select the correct written form of 7.",
+                "options": ["seven", "seventeen", "seventy"],
+                "correctIndex": 0
+              }
+            },
+            {
+              "id": "task_1_2_2",
+              "order": 2,
+              "type": "listening",
+              "title": "Listen and write the number",
+              "xpReward": 15,
+              "contentJson": {
+                "videoId": "PLACEHOLDER_YT_ID",
+                "startSecond": 40,
+                "endSecond": 46,
+                "prompt": "Which number did you hear?",
+                "options": ["thirteen", "thirty", "three"],
+                "correctIndex": 0
+              }
+            },
+            {
+              "id": "task_1_2_3",
+              "order": 3,
+              "type": "speaking",
+              "title": "Say the number out loud",
+              "xpReward": 20,
+              "contentJson": {
+                "promptText": "Say the following number out loud: seven",
+                "durationSeconds": 5,
+                "targetPhrase": "seven"
+              }
+            },
+            {
+              "id": "task_1_2_4",
+              "order": 4,
+              "type": "grammar",
+              "title": "Numbers in context",
+              "xpReward": 15,
+              "contentJson": {
+                "prompt": "There are ___ days in a week.",
+                "options": ["seven", "seventy", "seventeen"],
+                "correctIndex": 0
+              }
+            }
+          ]
+        },
+        {
+          "id": "session_1_3",
+          "order": 3,
+          "difficultyTier": "basic",
+          "title": "Present Simple",
+          "description": "Habla de rutinas y hechos usando presente simple.",
+          "tasks": [
+            {
+              "id": "task_1_3_1",
+              "order": 1,
+              "type": "grammar",
+              "title": "Conjugate the verb",
+              "xpReward": 15,
+              "contentJson": {
+                "prompt": "She ___ (to work) in a hospital.",
+                "options": ["work", "works", "working"],
+                "correctIndex": 1
+              }
+            },
+            {
+              "id": "task_1_3_2",
+              "order": 2,
+              "type": "reading",
+              "title": "Read a daily routine",
+              "xpReward": 15,
+              "contentJson": {
+                "passage": "Tom wakes up at 7 AM. He eats breakfast and goes to work at 8 AM. He comes home at 6 PM.",
+                "questions": [
+                  {
+                    "question": "What time does Tom wake up?",
+                    "options": ["6 AM", "7 AM", "8 AM"],
+                    "correctIndex": 1
+                  }
+                ]
+              }
+            },
+            {
+              "id": "task_1_3_3",
+              "order": 3,
+              "type": "writing",
+              "title": "Write your daily routine",
+              "xpReward": 20,
+              "contentJson": {
+                "prompt": "Write 3 sentences about your daily routine using present simple.",
+                "minWords": 15
+              }
+            },
+            {
+              "id": "task_1_3_4",
+              "order": 4,
+              "type": "speaking",
+              "title": "Describe your routine",
+              "xpReward": 25,
+              "contentJson": {
+                "promptText": "Describe your morning routine in 3 sentences.",
+                "durationSeconds": 30
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'path_screen.dart';
 
 import '../models/user_profile.dart';
 import '../services/auth_service.dart';
@@ -102,6 +103,23 @@ class _ProfileContent extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 24),
+        FilledButton.icon(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PathScreen(),
+              ),
+            );
+          },
+          icon: const Icon(Icons.play_arrow),
+          label: const Text('Comenzar a aprender'),
+          style: FilledButton.styleFrom(
+            minimumSize: const Size.fromHeight(50), // Botón ancho
+          ),
+        ),
+        const SizedBox(height: 16),
       ],
     );
   }
