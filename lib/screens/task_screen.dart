@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/auth_service.dart';
+import '../services/firestore_service.dart';
 
 import '../models/task_model.dart';
 
@@ -16,7 +19,7 @@ class _TaskScreenState extends State<TaskScreen> {
   bool _isChecked = false;
   bool _isCorrect = false;
 
-  void _checkAnswer() {
+  Future<void> _checkAnswer() async {
     if (_selectedOptionIndex == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Por favor, selecciona una opción.')),
@@ -25,10 +28,34 @@ class _TaskScreenState extends State<TaskScreen> {
     }
 
     final correctIndex = widget.task.contentJson['correctIndex'] as int?;
+    final isCorrect = _selectedOptionIndex == correctIndex;
+
     setState(() {
       _isChecked = true;
-      _isCorrect = _selectedOptionIndex == correctIndex;
+      _isCorrect = isCorrect;
     });
+
+    // Si acertó, guardamos el XP en Firestore
+    if (isCorrect) {
+      final authService = context.read<AuthService>();
+      final firestoreService = context.read<FirestoreService>();
+      final uid = authService.currentUser?.uid;
+
+      if (uid != null) {
+        try {
+          await firestoreService.addXpToUser(uid, widget.task.xpReward);
+        } catch (e) {
+          // Si falla Firestore, no bloqueamos al usuario, pero avisamos en consola
+          debugPrint('Error guardando XP: $e');
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                  content: Text('No se pudo guardar el XP (offline).')),
+            );
+          }
+        }
+      }
+    }
   }
 
   @override

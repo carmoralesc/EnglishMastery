@@ -53,6 +53,13 @@ class FirestoreService {
     });
   }
 
+  Future<void> addXpToUser(String uid, int xpAmount) async {
+    if (xpAmount <= 0) return;
+    await _usersRef.doc(uid).update({
+      'totalXp': FieldValue.increment(xpAmount),
+    });
+  }
+
   // ── CONTENIDO EDUCATIVO ────────────────────────────────────────
 
   Stream<List<LevelModel>> watchLevels() {
