@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/task_model.dart';
 import '../services/firestore_service.dart';
+import 'task_screen.dart';
 
 class SessionDetailScreen extends StatelessWidget {
   final String sessionId;
@@ -97,11 +98,10 @@ class SessionDetailScreen extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    // TODO(Fase 5.2): Navegar al reproductor/ejecutor de la tarea
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            'Tarea: ${task.title}. (Ejecución en Fase 5.2)'),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TaskScreen(task: task),
                       ),
                     );
                   },
