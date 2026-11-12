@@ -1,4 +1,4 @@
-package com.example.english_mastery
+package com.beateng.englishmasteracademy
 
 import io.flutter.embedding.android.FlutterActivity
 
