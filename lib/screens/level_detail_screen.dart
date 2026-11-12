@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/session_model.dart';
 import '../services/firestore_service.dart';
+import 'session_detail_screen.dart';
 
 class LevelDetailScreen extends StatelessWidget {
   final String levelId;
@@ -108,11 +109,13 @@ class LevelDetailScreen extends StatelessWidget {
                   ),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
-                    // TODO(Fase 6): Navegar a la pantalla de la Tarea
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            'Sesión: ${session.title}. (Tareas en Fase 6)'),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SessionDetailScreen(
+                          sessionId: session.id,
+                          sessionTitle: session.title,
+                        ),
                       ),
                     );
                   },
