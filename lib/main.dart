@@ -1,7 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+import 'firebase_options.dart';
+import 'screens/home_screen.dart';
+import 'screens/login_screen.dart';
+import 'services/auth_service.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const EnglishMasterAcademyApp());
 }
 
@@ -10,34 +21,56 @@ class EnglishMasterAcademyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'English Master Academy',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1E88E5)),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(create: (_) => AuthService()),
+      ],
+      child: MaterialApp(
+        title: 'English Master Academy',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF1E88E5),
+          ),
+          useMaterial3: true,
+        ),
+        home: const AuthGate(),
       ),
-      home: const _BootstrapPlaceholder(),
     );
   }
 }
 
-class _BootstrapPlaceholder extends StatelessWidget {
-  const _BootstrapPlaceholder();
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('English Master Academy')),
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Text(
-            'Bootstrap OK.\nFirebase y navegación se conectan en la siguiente fase.',
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
+    final authService = context.read<AuthService>();
+
+    return StreamBuilder<User?>(
+      stream: authService.authStateChanges,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const _LoadingScreen();
+        }
+
+        final user = snapshot.data;
+        if (user == null) {
+          return const LoginScreen();
+        }
+        return const HomeScreen();
+      },
+    );
+  }
+}
+
+class _LoadingScreen extends StatelessWidget {
+  const _LoadingScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }

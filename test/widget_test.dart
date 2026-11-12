@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:english_master_academy/main.dart';
+
+import 'package:english_master_academy/screens/login_screen.dart';
 
 void main() {
-  testWidgets('La app arranca y muestra el placeholder de bootstrap',
+  testWidgets('LoginScreen renderiza 2 campos y el botón Entrar',
       (WidgetTester tester) async {
-    await tester.pumpWidget(const EnglishMasterAcademyApp());
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
 
-    expect(find.text('English Master Academy'), findsOneWidget);
-    expect(find.textContaining('Bootstrap OK'), findsOneWidget);
+    expect(find.byType(TextField), findsNWidgets(2));
+    expect(find.text('Entrar'), findsOneWidget);
+    expect(find.text('Iniciar sesión'), findsOneWidget);
   });
 }
