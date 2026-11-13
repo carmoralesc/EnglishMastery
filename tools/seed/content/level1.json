@@ -8,6 +8,7 @@
       "description": "Primeros pasos en inglés: saludos, números y presente simple.",
       "isLocked": false,
       "iconName": "rocket_launch",
+      "requiredXp": 0,
       "sessions": [
         {
           "id": "session_1_1",
